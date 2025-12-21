@@ -1,3 +1,6 @@
+### v1.4.1 (2025/12/21)
+- Update LibCrafts (support latest Turtle localization changes)
+
 ### v1.4 (2025/09/09)
 - Update LibCrafts (add a lot of Turtle recipes, fix data errors)
 - Add very basic support of craft tooltips
