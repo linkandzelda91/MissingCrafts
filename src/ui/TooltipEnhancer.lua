@@ -137,6 +137,10 @@ function TooltipEnhancer:GetRecipeStatus(character, craft)
         return RecipeStatus.IsLearned
     end
 
+    if not character:MatchesCraftSpecialization(craft) then
+        return RecipeStatus.CannotLearn
+    end
+
     if character:CanLearnNow(craft) then
         return RecipeStatus.CanLearnNow
     end

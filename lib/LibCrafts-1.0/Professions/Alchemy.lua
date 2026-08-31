@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Alchemy", 6
+local name, version = "Professions-Alchemy", 7
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Alchemy")
 if not module then return end
 
@@ -156,9 +156,9 @@ module:NewCraft(3448, "Lesser Invisibility Potion", 165, {SpellSource.Trainer})
 module:NewCraft(3449, "Shadow Oil", 165, {})
     :SetResult(3824)
     :AddRecipe(6068, Quality.Common, {RecipeSource.Vendor})
-    :AddReagent(3369, 4) -- Grave Moss
-    :AddReagent(3372, 1) -- Leaded Vial
-    :AddReagent(3818, 4) -- Fadeleaf
+    :AddReagent(3818, 4)
+    :AddReagent(3369, 2)
+    :AddReagent(3372, 1)
     :Save()
 
 module:NewCraft(3450, "Elixir of Fortitude", 175, {SpellSource.Trainer})
@@ -664,17 +664,17 @@ module:NewCraft(17573, "Greater Arcane Elixir", 285, {})
 module:NewCraft(17574, "Greater Fire Protection Potion", 290, {})
     :SetResult(13457)
     :AddRecipe(13494, Quality.Uncommon, {RecipeSource.Drop})
-    :AddReagent(7068, 1) -- Elemental Fire
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13463, 1) -- Dreamfoil
+    :AddReagent(7068, 1)
+    :AddReagent(4625, 1)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17575, "Greater Frost Protection Potion", 290, {})
     :SetResult(13456)
     :AddRecipe(13495, Quality.Uncommon, {RecipeSource.Drop})
-    :AddReagent(7070, 1) -- Elemental Water
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13463, 1) -- Dreamfoil
+    :AddReagent(7070, 1)
+    :AddReagent(13467, 1)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17576, "Greater Nature Protection Potion", 290, {})
@@ -696,17 +696,17 @@ module:NewCraft(17577, "Greater Arcane Protection Potion", 290, {})
 module:NewCraft(17578, "Greater Shadow Protection Potion", 290, {})
     :SetResult(13459)
     :AddRecipe(13499, Quality.Uncommon, {RecipeSource.Drop})
-    :AddReagent(3824, 1) -- Shadow Oil
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13463, 1) -- Dreamfoil
+    :AddReagent(3824, 1)
+    :AddReagent(8836, 2)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17580, "Major Mana Potion", 295, {})
     :SetResult(13444)
     :AddRecipe(13501, Quality.Uncommon, {RecipeSource.Drop, RecipeSource.Vendor})
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13463, 3) -- Dreamfoil
-    :AddReagent(13467, 2) -- Icecap
+    :AddReagent(13463, 2)
+    :AddReagent(13467, 2)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17634, "Flask of Petrification", 300, {})
@@ -721,19 +721,19 @@ module:NewCraft(17634, "Flask of Petrification", 300, {})
 module:NewCraft(17635, "Flask of the Titans", 300, {})
     :SetResult(13510)
     :AddRecipe(13519, Quality.Uncommon, {RecipeSource.Drop})
-    :AddReagent(8846, 30) -- Gromsblood
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13423, 10) -- Stonescale Oil
-    :AddReagent(13468, 1) -- Black Lotus
+    :AddReagent(13464, 30)
+    :AddReagent(13423, 10)
+    :AddReagent(13468, 1)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17636, "Flask of Distilled Wisdom", 300, {})
     :SetResult(13511)
     :AddRecipe(13520, Quality.Uncommon, {RecipeSource.Drop})
-    :AddReagent(8925, 1) -- Crystal Vial
-    :AddReagent(13463, 30) -- Dreamfoil
-    :AddReagent(13467, 10) -- Icecap
-    :AddReagent(13468, 1) -- Black Lotus
+    :AddReagent(8838, 30)
+    :AddReagent(13467, 10)
+    :AddReagent(13468, 1)
+    :AddReagent(8925, 1)
     :Save()
 
 module:NewCraft(17637, "Flask of Supreme Power", 300, {})
@@ -765,10 +765,10 @@ module:NewCraft(21923, "Elixir of Frost Power", 190, {})
 module:NewCraft(22732, "Major Rejuvenation Potion", 300, {})
     :SetResult(18253)
     :AddRecipe(18257, Quality.Rare, {RecipeSource.Drop})
-    :AddReagent(10286, 1) -- Heart of the Wild
-    :AddReagent(13463, 4) -- Dreamfoil
-    :AddReagent(13464, 4) -- Golden Sansam
-    :AddReagent(18256, 1) -- Imbued Vial
+    :AddReagent(10286, 1)
+    :AddReagent(13464, 3)
+    :AddReagent(13463, 3)
+    :AddReagent(18256, 1)
     :Save()
 
 module:NewCraft(22808, "Elixir of Greater Water Breathing", 215, {SpellSource.Trainer})
@@ -845,10 +845,11 @@ if lib.env.is_turtle_wow then
     module:NewCraft(3449, "Shadow Oil", 165, {})
         :SetResult(3824)
         :AddRecipe(6068, Quality.Common, {RecipeSource.Vendor})
-        :AddReagent(3369, 2) -- Grave Moss
-        :AddReagent(3372, 1) -- Leaded Vial
-        :AddReagent(3818, 4) -- Fadeleaf
-        :Save()
+        
+    :AddReagent(3818, 4)
+    :AddReagent(3369, 2)
+    :AddReagent(3372, 1)
+    :Save()
 
     module:NewCraft(3454, "Frost Oil", 200, {})
         :SetResult(3829)
@@ -861,26 +862,29 @@ if lib.env.is_turtle_wow then
     module:NewCraft(17574, "Greater Fire Protection Potion", 290, {})
         :SetResult(13457)
         :AddRecipe(13494, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(4625, 1) -- Firebloom
-        :AddReagent(7068, 1) -- Elemental Fire
-        :AddReagent(8925, 1) -- Crystal Vial
-        :Save()
+        
+    :AddReagent(7068, 1)
+    :AddReagent(4625, 1)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(17575, "Greater Frost Protection Potion", 290, {})
         :SetResult(13456)
         :AddRecipe(13495, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(7070, 1) -- Elemental Water
-        :AddReagent(8925, 1) -- Crystal Vial
-        :AddReagent(13467, 1) -- Icecap
-        :Save()
+        
+    :AddReagent(7070, 1)
+    :AddReagent(13467, 1)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(17578, "Greater Shadow Protection Potion", 290, {})
         :SetResult(13459)
         :AddRecipe(13499, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(3824, 1) -- Shadow Oil
-        :AddReagent(8836, 2) -- Arthas' Tears
-        :AddReagent(8925, 1) -- Crystal Vial
-        :Save()
+        
+    :AddReagent(3824, 1)
+    :AddReagent(8836, 2)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(17579, "Greater Holy Protection Potion", 290, {})
         :SetResult(13460)
@@ -893,10 +897,11 @@ if lib.env.is_turtle_wow then
     module:NewCraft(17580, "Major Mana Potion", 295, {})
         :SetResult(13444)
         :AddRecipe(13501, Quality.Uncommon, {RecipeSource.Drop, RecipeSource.Vendor})
-        :AddReagent(8925, 1) -- Crystal Vial
-        :AddReagent(13463, 2) -- Dreamfoil
-        :AddReagent(13467, 2) -- Icecap
-        :Save()
+        
+    :AddReagent(13463, 2)
+    :AddReagent(13467, 2)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(17632, "Alchemist's Stone", 300, {})
         :SetResult(13503)
@@ -913,20 +918,22 @@ if lib.env.is_turtle_wow then
     module:NewCraft(17635, "Flask of the Titans", 300, {})
         :SetResult(13510)
         :AddRecipe(13519, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(8925, 1) -- Crystal Vial
-        :AddReagent(13423, 10) -- Stonescale Oil
-        :AddReagent(13464, 30) -- Golden Sansam
-        :AddReagent(13468, 1) -- Black Lotus
-        :Save()
+        
+    :AddReagent(13464, 30)
+    :AddReagent(13423, 10)
+    :AddReagent(13468, 1)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(17636, "Flask of Distilled Wisdom", 300, {})
         :SetResult(13511)
         :AddRecipe(13520, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(8838, 30) -- Sungrass
-        :AddReagent(8925, 1) -- Crystal Vial
-        :AddReagent(13467, 10) -- Icecap
-        :AddReagent(13468, 1) -- Black Lotus
-        :Save()
+        
+    :AddReagent(8838, 30)
+    :AddReagent(13467, 10)
+    :AddReagent(13468, 1)
+    :AddReagent(8925, 1)
+    :Save()
 
     module:NewCraft(22430, "Refined Scale of Onyxia", 300, {SpellSource.Quest})
         :SetResult(17967)
@@ -936,11 +943,12 @@ if lib.env.is_turtle_wow then
     module:NewCraft(22732, "Major Rejuvenation Potion", 300, {})
         :SetResult(18253)
         :AddRecipe(18257, Quality.Rare, {RecipeSource.Drop})
-        :AddReagent(10286, 1) -- Heart of the Wild
-        :AddReagent(13463, 3) -- Dreamfoil
-        :AddReagent(13464, 3) -- Golden Sansam
-        :AddReagent(18256, 1) -- Imbued Vial
-        :Save()
+        
+    :AddReagent(10286, 1)
+    :AddReagent(13464, 3)
+    :AddReagent(13463, 3)
+    :AddReagent(18256, 1)
+    :Save()
 
     module:NewCraft(36901, "Elixir of Greater Frost Power", 300, {})
         :SetResult(55046)

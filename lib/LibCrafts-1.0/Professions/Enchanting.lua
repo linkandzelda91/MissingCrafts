@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Enchanting", 4
+local name, version = "Professions-Enchanting", 5
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Enchanting")
 if not module then return end
 
@@ -503,16 +503,16 @@ module:NewCraft(14807, "Greater Magic Wand", 70, {SpellSource.Trainer})
 
 module:NewCraft(14809, "Lesser Mystic Wand", 155, {SpellSource.Trainer})
     :SetResult(11289)
-    :AddReagent(11083, 1) -- Soul Dust
-    :AddReagent(11134, 1) -- Lesser Mystic Essence
-    :AddReagent(11291, 1) -- Star Wood
+    :AddReagent(42007, 1)
+    :AddReagent(11134, 1)
+    :AddReagent(11083, 1)
     :Save()
 
 module:NewCraft(14810, "Greater Mystic Wand", 175, {SpellSource.Trainer})
     :SetResult(11290)
-    :AddReagent(11135, 1) -- Greater Mystic Essence
-    :AddReagent(11137, 1) -- Vision Dust
-    :AddReagent(11291, 1) -- Star Wood
+    :AddReagent(42007, 1)
+    :AddReagent(11135, 1)
+    :AddReagent(11137, 1)
     :Save()
 
 module:NewCraft(15596, "Smoking Heart of the Mountain", 265, {})
@@ -525,8 +525,8 @@ module:NewCraft(15596, "Smoking Heart of the Mountain", 265, {})
 
 module:NewCraft(17180, "Enchanted Thorium", 250, {SpellSource.Trainer})
     :SetResult(12655)
-    :AddReagent(11176, 3) -- Dream Dust
-    :AddReagent(12359, 1) -- Thorium Bar
+    :AddReagent(12359, 1)
+    :AddReagent(16204, 3)
     :Save()
 
 module:NewCraft(17181, "Enchanted Leather", 250, {SpellSource.Trainer})

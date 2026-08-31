@@ -18,4 +18,5 @@ L["Tailoring"] = "Alfaiataria"
 if lib.env.is_turtle_wow then
     L["Disguise"] = "Disfarce"
     L["Jewelcrafting"] = "Joalheria"
+    L["Survival"] = "Survival"
 end

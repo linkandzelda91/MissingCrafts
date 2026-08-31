@@ -4,6 +4,7 @@ setfenv(1, MissingCrafts)
 ---@field localizedName string
 ---@field rank number
 ---@field knownLocalizedSkillNamesSet table<string, boolean>
+---@field specialization CraftSpecialization|nil
 
 ---@class Character
 ---@field name string
@@ -27,6 +28,7 @@ function Character:Create(dbCharacter)
             localizedName = professionName,
             rank = profession.rank,
             knownLocalizedSkillNamesSet = skillSet,
+            specialization = profession.specialization,
         }
     end
 
@@ -47,6 +49,17 @@ function Character:GetProfessionRank(localizedName)
     return profession.rank
 end
 
+
+---@param localizedName string
+---@return CraftSpecialization|nil
+function Character:GetProfessionSpecialization(localizedName)
+    local profession = self.professionLocalizedNameToProfession[localizedName]
+    if profession == nil then
+        return nil
+    end
+    return profession.specialization
+end
+
 ---@param craft Craft
 ---@return boolean
 function Character:Knows(craft)
@@ -59,10 +72,33 @@ end
 
 ---@param craft Craft
 ---@return boolean
+function Character:MatchesCraftSpecialization(craft)
+    if craft.requiredSpecialization == nil then
+        return true
+    end
+
+    local profession = self.professionLocalizedNameToProfession[craft.localizedProfessionName]
+    if profession == nil then
+        return false
+    end
+
+    -- If the specialization could not be determined yet, keep the craft
+    -- visible rather than incorrectly rejecting a valid recipe.
+    if profession.specialization == nil then
+        return true
+    end
+
+    return profession.specialization == craft.requiredSpecialization
+end
+
+---@param craft Craft
+---@return boolean
 function Character:CanLearnNow(craft)
     local profession = self.professionLocalizedNameToProfession[craft.localizedProfessionName]
     if profession == nil then
         return false
     end
-    return not self:Knows(craft) and profession.rank >= craft.skillLevel
+    return not self:Knows(craft)
+        and self:MatchesCraftSpecialization(craft)
+        and profession.rank >= craft.skillLevel
 end

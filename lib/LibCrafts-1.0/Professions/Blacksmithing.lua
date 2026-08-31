@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Blacksmithing", 4
+local name, version = "Professions-Blacksmithing", 5
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Blacksmithing")
 if not module then return end
 
@@ -558,7 +558,7 @@ module:NewCraft(8367, "Ironforge Breastplate", 100, {})
     :AddReagent(3470, 3) -- Rough Grinding Stone
     :Save()
 
-module:NewCraft(8768, "Iron Buckle", 150, {SpellSource.Trainer})
+module:NewCraft(8768, "Iron Belt Buckle", 150, {SpellSource.Trainer})
     :SetResult(7071)
     :AddReagent(3575, 1) -- Iron Bar
     :Save()
@@ -1340,10 +1340,10 @@ module:NewCraft(16745, "Enchanted Thorium Breastplate", 300, {})
 module:NewCraft(16746, "Invulnerable Mail", 300, {})
     :SetResult(12641)
     :AddRecipe(12728, Quality.Epic, {RecipeSource.Drop})
-    :AddReagent(12360, 30) -- Arcanite Bar
-    :AddReagent(12364, 6) -- Huge Emerald
-    :AddReagent(12655, 30) -- Enchanted Thorium Bar
-    :AddReagent(12800, 6) -- Azerothian Diamond
+    :AddReagent(12360, 20)
+    :AddReagent(12655, 20)
+    :AddReagent(12364, 6)
+    :AddReagent(12800, 6)
     :Save()
 
 module:NewCraft(16969, "Ornate Thorium Handaxe", 275, {})
@@ -1439,12 +1439,12 @@ module:NewCraft(16988, "Hammer of the Titans", 300, {})
 module:NewCraft(16990, "Arcanite Champion", 300, {})
     :SetResult(12790)
     :AddRecipe(12834, Quality.Rare, {RecipeSource.Drop, RecipeSource.Vendor})
-    :AddReagent(12360, 15) -- Arcanite Bar
-    :AddReagent(12644, 2) -- Dense Grinding Stone
-    :AddReagent(12799, 4) -- Large Opal
-    :AddReagent(12800, 8) -- Azerothian Diamond
-    :AddReagent(12810, 8) -- Enchanted Leather
-    :AddReagent(12811, 1) -- Righteous Orb
+    :AddReagent(12360, 10)
+    :AddReagent(12800, 8)
+    :AddReagent(12811, 1)
+    :AddReagent(12799, 4)
+    :AddReagent(12810, 8)
+    :AddReagent(12644, 2)
     :Save()
 
 module:NewCraft(16991, "Annihilator", 300, {})
@@ -1482,9 +1482,9 @@ module:NewCraft(16993, "Masterwork Stormhammer", 300, {})
 module:NewCraft(16994, "Arcanite Reaper", 300, {})
     :SetResult(12784)
     :AddRecipe(12838, Quality.Rare, {RecipeSource.Drop})
-    :AddReagent(12360, 20) -- Arcanite Bar
-    :AddReagent(12644, 2) -- Dense Grinding Stone
-    :AddReagent(12810, 6) -- Enchanted Leather
+    :AddReagent(12360, 14)
+    :AddReagent(12810, 6)
+    :AddReagent(12644, 2)
     :Save()
 
 module:NewCraft(16995, "Heartseeker", 300, {})
@@ -1540,9 +1540,9 @@ module:NewCraft(20872, "Fiery Chain Girdle", 295, {})
 module:NewCraft(20873, "Fiery Chain Shoulders", 300, {})
     :SetResult(16988)
     :AddRecipe(17053, Quality.Rare, {RecipeSource.Vendor})
-    :AddReagent(11371, 16) -- Dark Iron Bar
-    :AddReagent(17010, 4) -- Fiery Core
-    :AddReagent(17011, 5) -- Lava Core
+    :AddReagent(11371, 10)
+    :AddReagent(17010, 4)
+    :AddReagent(17011, 3)
     :Save()
 
 module:NewCraft(20874, "Dark Iron Bracers", 295, {})
@@ -1564,19 +1564,19 @@ module:NewCraft(20876, "Dark Iron Leggings", 300, {})
 module:NewCraft(20890, "Dark Iron Reaver", 300, {})
     :SetResult(17015)
     :AddRecipe(17059, Quality.Rare, {RecipeSource.Vendor})
-    :AddReagent(11371, 16) -- Dark Iron Bar
-    :AddReagent(11382, 2) -- Blood of the Mountain
-    :AddReagent(12810, 2) -- Enchanted Leather
-    :AddReagent(17010, 12) -- Fiery Core
+    :AddReagent(11371, 10)
+    :AddReagent(17010, 6)
+    :AddReagent(11382, 2)
+    :AddReagent(12810, 2)
     :Save()
 
 module:NewCraft(20897, "Dark Iron Destroyer", 300, {})
     :SetResult(17016)
     :AddRecipe(17060, Quality.Rare, {RecipeSource.Vendor})
-    :AddReagent(11371, 18) -- Dark Iron Bar
-    :AddReagent(11382, 2) -- Blood of the Mountain
-    :AddReagent(12810, 2) -- Enchanted Leather
-    :AddReagent(17011, 12) -- Lava Core
+    :AddReagent(11371, 10)
+    :AddReagent(17011, 6)
+    :AddReagent(11382, 2)
+    :AddReagent(12810, 2)
     :Save()
 
 module:NewCraft(21161, "Sulfuron Hammer", 300, {})
@@ -2047,11 +2047,12 @@ if lib.env.is_turtle_wow then
     module:NewCraft(16746, "Invulnerable Mail", 300, {})
         :SetResult(12641)
         :AddRecipe(12728, Quality.Epic, {RecipeSource.Drop})
-        :AddReagent(12360, 20) -- Arcanite Bar
-        :AddReagent(12364, 6) -- Huge Emerald
-        :AddReagent(12655, 20) -- Enchanted Thorium Bar
-        :AddReagent(12800, 6) -- Azerothian Diamond
-        :Save()
+        
+    :AddReagent(12360, 20)
+    :AddReagent(12655, 20)
+    :AddReagent(12364, 6)
+    :AddReagent(12800, 6)
+    :Save()
 
     module:NewCraft(16960, "Thorium Greatsword", 260, {})
         :SetResult(12764)
@@ -2126,21 +2127,23 @@ if lib.env.is_turtle_wow then
     module:NewCraft(16990, "Arcanite Champion", 300, {})
         :SetResult(12790)
         :AddRecipe(12834, Quality.Rare, {RecipeSource.Drop, RecipeSource.Vendor})
-        :AddReagent(12360, 10) -- Arcanite Bar
-        :AddReagent(12644, 2) -- Dense Grinding Stone
-        :AddReagent(12799, 4) -- Large Opal
-        :AddReagent(12800, 8) -- Azerothian Diamond
-        :AddReagent(12810, 8) -- Enchanted Leather
-        :AddReagent(12811, 1) -- Righteous Orb
-        :Save()
+        
+    :AddReagent(12360, 10)
+    :AddReagent(12800, 8)
+    :AddReagent(12811, 1)
+    :AddReagent(12799, 4)
+    :AddReagent(12810, 8)
+    :AddReagent(12644, 2)
+    :Save()
 
     module:NewCraft(16994, "Arcanite Reaper", 300, {})
         :SetResult(12784)
         :AddRecipe(12838, Quality.Rare, {RecipeSource.Drop})
-        :AddReagent(12360, 14) -- Arcanite Bar
-        :AddReagent(12644, 2) -- Dense Grinding Stone
-        :AddReagent(12810, 6) -- Enchanted Leather
-        :Save()
+        
+    :AddReagent(12360, 14)
+    :AddReagent(12810, 6)
+    :AddReagent(12644, 2)
+    :Save()
 
     module:NewCraft(20872, "Fiery Chain Girdle", 300, {})
         :SetResult(16989)
@@ -2153,10 +2156,11 @@ if lib.env.is_turtle_wow then
     module:NewCraft(20873, "Fiery Chain Shoulders", 300, {})
         :SetResult(16988)
         :AddRecipe(17053, Quality.Rare, {RecipeSource.Vendor})
-        :AddReagent(11371, 10) -- Dark Iron Bar
-        :AddReagent(17010, 4) -- Fiery Core
-        :AddReagent(17011, 3) -- Lava Core
-        :Save()
+        
+    :AddReagent(11371, 10)
+    :AddReagent(17010, 4)
+    :AddReagent(17011, 3)
+    :Save()
 
     module:NewCraft(20874, "Dark Iron Bracers", 300, {})
         :SetResult(17014)
@@ -2169,20 +2173,22 @@ if lib.env.is_turtle_wow then
     module:NewCraft(20890, "Dark Iron Reaver", 300, {})
         :SetResult(17015)
         :AddRecipe(17059, Quality.Rare, {RecipeSource.Vendor})
-        :AddReagent(11371, 10) -- Dark Iron Bar
-        :AddReagent(11382, 2) -- Blood of the Mountain
-        :AddReagent(12810, 2) -- Enchanted Leather
-        :AddReagent(17010, 6) -- Fiery Core
-        :Save()
+        
+    :AddReagent(11371, 10)
+    :AddReagent(17010, 6)
+    :AddReagent(11382, 2)
+    :AddReagent(12810, 2)
+    :Save()
 
     module:NewCraft(20897, "Dark Iron Destroyer", 300, {})
         :SetResult(17016)
         :AddRecipe(17060, Quality.Rare, {RecipeSource.Vendor})
-        :AddReagent(11371, 10) -- Dark Iron Bar
-        :AddReagent(11382, 2) -- Blood of the Mountain
-        :AddReagent(12810, 2) -- Enchanted Leather
-        :AddReagent(17011, 6) -- Lava Core
-        :Save()
+        
+    :AddReagent(11371, 10)
+    :AddReagent(17011, 6)
+    :AddReagent(11382, 2)
+    :AddReagent(12810, 2)
+    :Save()
 
     module:NewCraft(36907, "Rune-Inscribed Plate Leggings", 300, {})
         :SetResult(55058)
@@ -2432,12 +2438,14 @@ if lib.env.is_turtle_wow then
     module:NewCraft(47023, "Rune-Etched Breastplate", 300, {})
         :SetResult(60290)
         :AddRecipe(83503, Quality.Rare, {RecipeSource.Drop})
-        :AddReagent(12359, 24) -- Thorium Bar
-        :AddReagent(12644, 1) -- Dense Grinding Stone
-        :AddReagent(12655, 4) -- Enchanted Thorium Bar
-        :AddReagent(12810, 2) -- Enchanted Leather
-        :AddReagent(20520, 4) -- Dark Rune
-        :Save()
+        
+    :AddReagent(12359, 24)
+    :AddReagent(12655, 4)
+    :AddReagent(20520, 4)
+    :AddReagent(12810, 2)
+    :AddReagent(12644, 1)
+    :AddReagent(7910, 1)
+    :Save()
 
     module:NewCraft(47024, "Rune-Etched Crown", 300, {})
         :SetResult(60291)

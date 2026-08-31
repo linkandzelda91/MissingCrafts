@@ -23,6 +23,7 @@ if lib.env.is_turtle_wow then
     L["Engineering"] = "Engenharia"
     L["First Aid"] = "Primeiros Socorros"
     L["Jewelcrafting"] = "Joalheria"
+    L["Survival"] = "Survival"
     L["Leatherworking"] = "Couraria"
     L["Mining"] = "Mineração"
     L["Tailoring"] = "Alfaiataria"

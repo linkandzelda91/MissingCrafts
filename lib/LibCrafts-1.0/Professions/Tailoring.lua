@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Tailoring", 4
+local name, version = "Professions-Tailoring", 5
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Tailoring")
 if not module then return end
 
@@ -1435,21 +1435,21 @@ module:NewCraft(19435, "Mooncloth Boots", 290, {SpellSource.Quest})
 module:NewCraft(20848, "Flarecore Mantle", 300, {})
     :SetResult(16980)
     :AddRecipe(17017, Quality.Common, {RecipeSource.Vendor})
-    :AddReagent(12810, 6) -- Enchanted Leather
-    :AddReagent(14048, 12) -- Bolt of Runecloth
-    :AddReagent(14341, 2) -- Rune Thread
-    :AddReagent(17010, 4) -- Fiery Core
-    :AddReagent(17011, 4) -- Lava Core
+    :AddReagent(14342, 6)
+    :AddReagent(17010, 4)
+    :AddReagent(17011, 4)
+    :AddReagent(12810, 6)
+    :AddReagent(14341, 2)
     :Save()
 
 module:NewCraft(20849, "Flarecore Gloves", 300, {})
     :SetResult(16979)
     :AddRecipe(17018, Quality.Common, {RecipeSource.Vendor})
-    :AddReagent(7078, 4) -- Essence of Fire
-    :AddReagent(12810, 2) -- Enchanted Leather
-    :AddReagent(14048, 8) -- Bolt of Runecloth
-    :AddReagent(14341, 2) -- Rune Thread
-    :AddReagent(17010, 6) -- Fiery Core
+    :AddReagent(14342, 4)
+    :AddReagent(17010, 6)
+    :AddReagent(7078, 4)
+    :AddReagent(12810, 2)
+    :AddReagent(14341, 2)
     :Save()
 
 module:NewCraft(21945, "Green Holiday Shirt", 190, {})
@@ -1903,22 +1903,24 @@ if lib.env.is_turtle_wow then
     module:NewCraft(20848, "Flarecore Mantle", 300, {})
         :SetResult(16980)
         :AddRecipe(17017, Quality.Common, {RecipeSource.Vendor})
-        :AddReagent(12810, 6) -- Enchanted Leather
-        :AddReagent(14341, 2) -- Rune Thread
-        :AddReagent(14342, 6) -- Mooncloth
-        :AddReagent(17010, 4) -- Fiery Core
-        :AddReagent(17011, 4) -- Lava Core
-        :Save()
+        
+    :AddReagent(14342, 6)
+    :AddReagent(17010, 4)
+    :AddReagent(17011, 4)
+    :AddReagent(12810, 6)
+    :AddReagent(14341, 2)
+    :Save()
 
     module:NewCraft(20849, "Flarecore Gloves", 300, {})
         :SetResult(16979)
         :AddRecipe(17018, Quality.Common, {RecipeSource.Vendor})
-        :AddReagent(7078, 4) -- Essence of Fire
-        :AddReagent(12810, 2) -- Enchanted Leather
-        :AddReagent(14341, 2) -- Rune Thread
-        :AddReagent(14342, 4) -- Mooncloth
-        :AddReagent(17010, 6) -- Fiery Core
-        :Save()
+        
+    :AddReagent(14342, 4)
+    :AddReagent(17010, 6)
+    :AddReagent(7078, 4)
+    :AddReagent(12810, 2)
+    :AddReagent(14341, 2)
+    :Save()
 
     module:NewCraft(26403, "Festive Red Dress", 250, {})
         :SetResult(21154)
@@ -1950,13 +1952,14 @@ if lib.env.is_turtle_wow then
     module:NewCraft(36915, "Spellwoven Nobility Drape", 300, {})
         :SetResult(55056)
         :AddRecipe(55055, Quality.Epic, {RecipeSource.Vendor})
-        :AddReagent(9210, 10) -- Ghost Dye
-        :AddReagent(14048, 8) -- Bolt of Runecloth
-        :AddReagent(14341, 1) -- Rune Thread
-        :AddReagent(14342, 3) -- Mooncloth
-        :AddReagent(16204, 40) -- Illusion Dust
-        :AddReagent(20725, 1) -- Nexus Crystal
-        :Save()
+        
+    :AddReagent(14342, 3)
+    :AddReagent(14048, 8)
+    :AddReagent(20725, 1)
+    :AddReagent(16204, 40)
+    :AddReagent(14341, 4)
+    :AddReagent(9210, 10)
+    :Save()
 
     module:NewCraft(45066, "Gloves of Manathirst", 75, {})
         :SetResult(51256)

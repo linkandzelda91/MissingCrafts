@@ -11,7 +11,7 @@
 local LibStub = getglobal("LibStub")
 assert(LibStub ~= nil)
 
-local untyped_lib, _ = LibStub:NewLibrary("LibCraftingProfessions-1.0", 18)
+local untyped_lib, _ = LibStub:NewLibrary("LibCraftingProfessions-1.0", 19)
 if not untyped_lib then
     return
 end
@@ -44,6 +44,7 @@ P["Poisons"] = {icon = [[Interface\Icons\trade_brewpoison]]}
 P["Tailoring"] = {icon = [[Interface\Icons\trade_tailoring]]}
 if IS_TURTLE_WOW then
     P["Jewelcrafting"] = {icon = [[Interface\Icons\inv_helmet_44]]}
+    P["Survival"] = {icon = [[Interface\Icons\INV_Misc_Rope_01]]}
 end
 local PROFESSION_TO_PROPS = P
 P = {}
@@ -591,6 +592,7 @@ if game_locale == "enUS" or game_locale == "enGB" then
     L["Tailoring"] = "Tailoring"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Jewelcrafting"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "deDE" then
     L["Alchemy"] = "Alchimie"
@@ -605,6 +607,7 @@ elseif game_locale == "deDE" then
     L["Tailoring"] = "Schneiderei"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Juwelenschleifen"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "esES" then
     L["Alchemy"] = "Alquimia"
@@ -624,6 +627,7 @@ elseif game_locale == "esES" then
         L["Engineering"] = "Engenharia"
         L["First Aid"] = "Primeiros Socorros"
         L["Jewelcrafting"] = "Joalheria"
+        L["Survival"] = "Survival"
         L["Leatherworking"] = "Couraria"
         L["Mining"] = "Mineração"
         L["Tailoring"] = "Alfaiataria"
@@ -641,6 +645,7 @@ elseif game_locale == "esMX" then
     L["Tailoring"] = "Sastrería"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Joyería"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "frFR" then
     L["Alchemy"] = "Alchimie"
@@ -655,6 +660,7 @@ elseif game_locale == "frFR" then
     L["Tailoring"] = "Couture"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Joaillerie"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "koKR" then
     L["Alchemy"] = "연금술"
@@ -669,6 +675,7 @@ elseif game_locale == "koKR" then
     L["Tailoring"] = "재봉술"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "보석세공"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "ptBR" then
     L["Alchemy"] = "Alquimia"
@@ -683,6 +690,7 @@ elseif game_locale == "ptBR" then
     L["Tailoring"] = "Alfaiataria"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Joalheria"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "ruRU" then
     L["Alchemy"] = "Алхимия"
@@ -697,6 +705,7 @@ elseif game_locale == "ruRU" then
     L["Tailoring"] = "Портняжное дело"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "Ювелирное дело"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "zhCN" then
     L["Alchemy"] = "炼金术"
@@ -711,6 +720,7 @@ elseif game_locale == "zhCN" then
     L["Tailoring"] = "裁缝"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "珠宝加工"
+        L["Survival"] = "Survival"
     end
 elseif game_locale == "zhTW" then
     L["Alchemy"] = "煉金術"
@@ -725,6 +735,7 @@ elseif game_locale == "zhTW" then
     L["Tailoring"] = "裁縫"
     if IS_TURTLE_WOW then
         L["Jewelcrafting"] = "珠寶設計"
+        L["Survival"] = "Survival"
     end
 end
 

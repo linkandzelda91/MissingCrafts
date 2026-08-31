@@ -4,6 +4,7 @@ setfenv(1, MissingCrafts)
 ---@field _db Database
 ---@field _characterRepository CharacterRepository
 ---@field _libCrafts LibCrafts
+---@field _specializationDetector SpecializationDetector
 CraftRepository = {}
 
 ---@alias CraftSource "Chest" | "Craft" | "Drop" | "Fishing" | "Gift" | "Pickpocketing" | "Quest" | "Trainer" | "Vendor" | "WorldObject" | "Unknown"
@@ -30,14 +31,17 @@ CraftSource = {
 ---@field isAvailable boolean
 ---@field recipeId number|nil
 ---@field resultId number|nil
+---@field requiredSpecialization CraftSpecialization|nil
 ---@field sources CraftSource[]
 
 ---@param database Database
 ---@param LibCrafts LibCrafts
-function CraftRepository:Create(database, characterRepository, LibCrafts)
+---@param specializationDetector SpecializationDetector
+function CraftRepository:Create(database, characterRepository, LibCrafts, specializationDetector)
     self._db = database
     self._characterRepository = characterRepository
     self._libCrafts = LibCrafts
+    self._specializationDetector = specializationDetector
     return self
 end
 
@@ -98,8 +102,9 @@ end
 ---@param craft LcCraft
 ---@param professionRank number
 ---@param LibCrafts LibCrafts
+---@param specializationDetector SpecializationDetector
 ---@return Craft
-local function create(craft, professionRank, LibCrafts)
+local function create(craft, professionRank, LibCrafts, specializationDetector)
     ---@type number|nil
     local recipeId
     for _, recipe in ipairs(craft.recipes) do
@@ -121,8 +126,27 @@ local function create(craft, professionRank, LibCrafts)
         isAvailable = craft.skill_level <= professionRank,
         recipeId = recipeId,
         resultId = resultId,
+        requiredSpecialization = specializationDetector:GetCraftRequiredSpecialization(craft),
         sources = parseSources(craft, LibCrafts)
     }
+end
+
+
+---@param name string
+---@return string
+local function normalizeSkillName(name)
+    local normalized = strlower(name or "")
+    normalized = string.gsub(normalized, "’", "'")
+    normalized = string.gsub(normalized, "‘", "'")
+    normalized = string.gsub(normalized, "´", "'")
+    normalized = string.gsub(normalized, "`", "'")
+    normalized = string.gsub(normalized, "–", "-")
+    normalized = string.gsub(normalized, "—", "-")
+    normalized = string.gsub(normalized, " ", " ")
+    normalized = string.gsub(normalized, "%s+", " ")
+    normalized = string.gsub(normalized, "^%s+", "")
+    normalized = string.gsub(normalized, "%s+$", "")
+    return normalized
 end
 
 ---@param characterName string
@@ -131,15 +155,23 @@ end
 ---@return Craft[]
 function CraftRepository:FindMissing(characterName, localizedProfessionName, searchQuery)
     local professionRank = 0
+    local characterSpecialization
     local character = self._characterRepository:Find(characterName)
     if character ~= nil then
         professionRank = (--[[---@not nil]] character):GetProfessionRank(localizedProfessionName)
+        characterSpecialization = (--[[---@not nil]] character):GetProfessionSpecialization(localizedProfessionName)
     end
 
     ---@type table<string, boolean>
     local characterSkillSet = {}
     for _, skillName in ipairs(self._db:GetLocalizedSkillNames(characterName, localizedProfessionName)) do
-        characterSkillSet[skillName] = true
+        characterSkillSet[normalizeSkillName(skillName)] = true
+    end
+
+    ---@type table<number, boolean>
+    local knownResultItemSet = {}
+    for _, resultItemId in ipairs(self._db:GetKnownResultItemIds(characterName, localizedProfessionName)) do
+        knownResultItemSet[resultItemId] = true
     end
 
     local lcSearchQuery = strlower(searchQuery)
@@ -147,7 +179,17 @@ function CraftRepository:FindMissing(characterName, localizedProfessionName, sea
     ---@type Craft[]
     local crafts = {}
     for _, craft in ipairs(self._libCrafts:GetCraftsByProfession(localizedProfessionName)) do
-        if characterSkillSet[craft.localized_spell_name] == nil then
+        local normalizedCraftName = normalizeSkillName(craft.localized_spell_name)
+        local resultId = craft.result ~= nil and craft.result.id or nil
+        local alreadyKnown = characterSkillSet[normalizedCraftName] ~= nil
+            or (resultId ~= nil and knownResultItemSet[resultId] ~= nil)
+
+        if not alreadyKnown then
+            local mappedCraft = create(craft, professionRank, self._libCrafts, self._specializationDetector)
+            local specializationMatches = characterSpecialization == nil
+                or mappedCraft.requiredSpecialization == nil
+                or mappedCraft.requiredSpecialization == characterSpecialization
+
             local match = false
             if lcSearchQuery ~= "" then
                 local lcSpellName = strlower(craft.localized_spell_name)
@@ -156,8 +198,8 @@ function CraftRepository:FindMissing(characterName, localizedProfessionName, sea
             else
                 match = true
             end
-            if match then
-                tinsert(crafts, create(craft, professionRank, self._libCrafts))
+            if match and specializationMatches then
+                tinsert(crafts, mappedCraft)
             end
         end
     end
@@ -178,7 +220,7 @@ function CraftRepository:FindByRecipeId(itemId)
         if character ~= nil then
             professionRank = (--[[---@not nil]] character):GetProfessionRank(craft.localized_profession_name)
         end
-        tinsert(crafts, create(craft, professionRank, self._libCrafts))
+        tinsert(crafts, create(craft, professionRank, self._libCrafts, self._specializationDetector))
     end
 
     return crafts

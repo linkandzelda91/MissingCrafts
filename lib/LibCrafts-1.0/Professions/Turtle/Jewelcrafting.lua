@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Jewelcrafting", 14
+local name, version = "Professions-Jewelcrafting", 15
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Jewelcrafting")
 if not module then return end
 
@@ -45,14 +45,15 @@ if lib.env.is_turtle_wow then
     module:NewCraft(36905, "Grandstaff of the Shen'dralar Elder", 300, {})
         :SetResult(55060)
         :AddRecipe(55059, Quality.Epic, {RecipeSource.Vendor})
-        :AddReagent(55252, 1) -- Imperial Topaz
-        :AddReagent(12360, 2) -- Arcanite Bar
-        :AddReagent(12655, 16) -- Enchanted Thorium Bar
-        :AddReagent(20725, 4) -- Nexus Crystal
-        :AddReagent(11291, 20) -- Star Wood
-        :AddReagent(12800, 6) -- Azerothian Diamond
-        :AddReagent(55248, 4) -- Enchanted Gemstone Oil
-        :Save()
+        
+    :AddReagent(55252, 4)
+    :AddReagent(12360, 2)
+    :AddReagent(12655, 16)
+    :AddReagent(20725, 4)
+    :AddReagent(11291, 20)
+    :AddReagent(12800, 6)
+    :AddReagent(55248, 4)
+    :Save()
 
     module:NewCraft(41001, "Bright Copper Ring", 15, {SpellSource.Trainer})
         :SetResult(55158)
@@ -577,14 +578,7 @@ if lib.env.is_turtle_wow then
         :AddReagent(55153, 2) -- Solid Gritted Paper
         :Save()
 
-    module:NewCraft(41247, "Small Pearl Ring", 65, {})
-        :SetResult(55169)
-        :AddRecipe(56021, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(55156, 1) -- Rough Copper Ring
-        :AddReagent(5498, 1) -- Small Lustrous Pearl
-        :AddReagent(55150, 2) -- Rough Gritted Paper
-        :AddReagent(55245, 1) -- Polishing Oil
-        :Save()
+    
 
     module:NewCraft(41249, "Bulky Copper Ring", 25, {})
         :SetResult(81093)
@@ -887,13 +881,7 @@ if lib.env.is_turtle_wow then
         :AddReagent(55152, 2) -- Heavy Gritted Paper
         :Save()
 
-    module:NewCraft(41335, "Shining Copper Cuffs", 80, {})
-        :SetResult(56044)
-        :AddRecipe(70117, Quality.Uncommon, {RecipeSource.Drop})
-        :AddReagent(2840, 6) -- Copper Bar
-        :AddReagent(818, 1) -- Tigerseye
-        :AddReagent(55246, 1) -- Shimmering Oil
-        :Save()
+    
 
     module:NewCraft(41337, "Dawnbright Cuffs", 115, {})
         :SetResult(56045)
@@ -1097,10 +1085,10 @@ if lib.env.is_turtle_wow then
 
     module:NewCraft(41577, "Malachite Ring", 20, {SpellSource.Trainer})
         :SetResult(81030)
-        :AddReagent(55156, 1) -- Rough Copper Ring
-        :AddReagent(774, 1) -- Malachite
-        :AddReagent(55150, 1) -- Rough Gritted Paper
-        :Save()
+        
+    :AddReagent(55156, 1)
+    :AddReagent(774, 1)
+    :Save()
 
     module:NewCraft(41579, "Marine's Demise", 190, {})
         :SetResult(55325)

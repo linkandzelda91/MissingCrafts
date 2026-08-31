@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Engineering", 4
+local name, version = "Professions-Engineering", 5
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Engineering")
 if not module then return end
 
@@ -965,11 +965,9 @@ module:NewCraft(21940, "SnowMaster 9000", 190, {})
 
 module:NewCraft(22704, "Field Repair Bot 74A", 300, {SpellSource.WorldObject})
     :SetResult(18232)
-    :AddReagent(7067, 2) -- Elemental Earth
-    :AddReagent(7068, 1) -- Elemental Fire
-    :AddReagent(7191, 1) -- Fused Wiring
-    :AddReagent(8170, 4) -- Rugged Leather
-    :AddReagent(12359, 12) -- Thorium Bar
+    :AddReagent(12359, 12)
+    :AddReagent(7191, 2)
+    :AddReagent(10558, 1)
     :Save()
 
 module:NewCraft(22793, "Biznicks 247x128 Accurascope", 300, {})
@@ -1309,10 +1307,11 @@ if lib.env.is_turtle_wow then
 
     module:NewCraft(22704, "Field Repair Bot 74A", 300, {SpellSource.WorldObject})
         :SetResult(18232)
-        :AddReagent(7191, 2) -- Fused Wiring
-        :AddReagent(10558, 1) -- Gold Power Core
-        :AddReagent(12359, 12) -- Thorium Bar
-        :Save()
+        
+    :AddReagent(12359, 12)
+    :AddReagent(7191, 2)
+    :AddReagent(10558, 1)
+    :Save()
 
     module:NewCraft(23071, "Truesilver Transformer", 260, {})
         :SetResult(18631)

@@ -18,4 +18,5 @@ L["Tailoring"] = "裁缝"
 if lib.env.is_turtle_wow then
     L["Disguise"] = "伪装术"
     L["Jewelcrafting"] = "珠宝加工"
+    L["Survival"] = "Survival"
 end

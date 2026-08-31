@@ -7,6 +7,8 @@ Database = {}
 ---@shape DatabaseProfession
 ---@field rank number
 ---@field knownLocalizedSkillNames string[]
+---@field knownResultItemIds number[]
+---@field specialization CraftSpecialization|nil
 
 ---@shape DatabaseCharacter
 ---@field realm string
@@ -71,14 +73,54 @@ function Database:GetLocalizedSkillNames(characterName, localizedProfessionName)
     return (profession or {}).knownLocalizedSkillNames or {}
 end
 
+
+---@param characterName string
+---@param localizedProfessionName string
+---@return number[]
+function Database:GetKnownResultItemIds(characterName, localizedProfessionName)
+    ---@type DatabaseProfession
+    local profession
+    for _, nameToCharacter in pairs(self._db.global.realmToNameToCharacter) do
+        if nameToCharacter[characterName] ~= nil then
+            profession = nameToCharacter[characterName].professionsByLocalizedName[localizedProfessionName]
+        end
+    end
+    return (profession or {}).knownResultItemIds or {}
+end
+
+
+---@param characterName string
+---@param localizedProfessionName string
+---@return CraftSpecialization|nil
+function Database:GetProfessionSpecialization(characterName, localizedProfessionName)
+    for _, nameToCharacter in pairs(self._db.global.realmToNameToCharacter) do
+        if nameToCharacter[characterName] ~= nil then
+            local profession = nameToCharacter[characterName].professionsByLocalizedName[localizedProfessionName]
+            if profession ~= nil then
+                return profession.specialization
+            end
+        end
+    end
+    return nil
+end
+
 ---@param localizedProfessionName string
 ---@param professionRank number
 ---@param localizedSkillNames string[]
-function Database:SaveCurrentPlayerSkills(localizedProfessionName, professionRank, localizedSkillNames)
+---@param knownResultItemIds number[]
+---@param specialization CraftSpecialization|nil
+function Database:SaveCurrentPlayerSkills(localizedProfessionName, professionRank, localizedSkillNames, knownResultItemIds, specialization)
     local player = self:_SavePlayer()
+    local previous = player.professionsByLocalizedName[localizedProfessionName]
+    if specialization == nil and previous ~= nil then
+        specialization = previous.specialization
+    end
+
     player.professionsByLocalizedName[localizedProfessionName] = {
         rank = professionRank,
-        knownLocalizedSkillNames = localizedSkillNames
+        knownLocalizedSkillNames = localizedSkillNames,
+        knownResultItemIds = knownResultItemIds or {},
+        specialization = specialization
     }
 end
 

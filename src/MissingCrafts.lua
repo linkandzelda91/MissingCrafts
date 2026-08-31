@@ -56,21 +56,38 @@ function addon:OnEnable()
     self.database = Database:Create(AceDB)
 
     local characterRepository = CharacterRepository:Create(self.database)
+    local specializationDetector = SpecializationDetector:Create()
     ---@type Repositories
     local repositories = {
-        characterRepository = CharacterRepository:Create(self.database),
+        characterRepository = characterRepository,
         professionRepository = ProfessionRepository:Create(LibCraftingProfessions),
-        craftRepository = CraftRepository:Create(self.database, characterRepository, LibCrafts)
+        craftRepository = CraftRepository:Create(self.database, characterRepository, LibCrafts, specializationDetector)
     }
 
     self.uiManager = UIManager:Create(addonInfo, repositories, L, libraries)
 
     LibCraftingProfessions:RegisterEvent("LCP_SKILLS_UPDATE", function(profession, skills)
         local skillNames = {}
+        local resultItemIds = {}
+        local seenResultItemIds = {}
         for _, skill in ipairs(skills) do
             tinsert(skillNames, skill.localized_name)
+
+            -- The live profession API gives us the crafted item's link. Keep
+            -- its item ID as a language/punctuation-independent identity for
+            -- known crafts. This is especially important for Turtle Survival,
+            -- where the client uses typographic apostrophes in some names.
+            if type(skill.item_link) == "string" then
+                local _, _, itemIdText = strfind(skill.item_link, "item:(%d+)")
+                local itemId = tonumber(itemIdText)
+                if itemId ~= nil and seenResultItemIds[itemId] == nil then
+                    seenResultItemIds[itemId] = true
+                    tinsert(resultItemIds, itemId)
+                end
+            end
         end
-        self.database:SaveCurrentPlayerSkills(profession.localized_name, profession.cur_rank, skillNames)
+        local specialization = specializationDetector:DetectPlayerProfessionSpecialization(profession.english_name, skills)
+        self.database:SaveCurrentPlayerSkills(profession.localized_name, profession.cur_rank, skillNames, resultItemIds, specialization)
 
         local playerProfessions = LibCraftingProfessions:GetPlayerProfessions()
         if playerProfessions ~= nil then
