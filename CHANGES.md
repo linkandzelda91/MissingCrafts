@@ -1,3 +1,7 @@
+### v1.5.4 (2026/09/04)
+- Added the missing Turtle/Octo Leatherworking recipe Grimtotem Bracers (skill 125), verified against the current client DBC and server data.
+- Added Pattern: Grimtotem Bracers (item 70243) as the rare drop recipe source.
+
 ### v1.5.3 (2026/08/30)
 - Rebuilt Turtle/Octo profession craft data against the current client DBC before using addon references.
 - Survival now uses the real client craft spell IDs and DBC reagent lists instead of placeholder IDs.

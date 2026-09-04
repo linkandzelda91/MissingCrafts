@@ -1,5 +1,5 @@
 local lib = LibCraftsGetLibrary()
-local name, version = "Professions-Leatherworking", 4
+local name, version = "Professions-Leatherworking", 5
 local module = --[[---@type LcProfessionModule]] lib:RegisterProfessionModule(name, version, "Leatherworking")
 if not module then return end
 
@@ -1912,6 +1912,16 @@ if lib.env.is_turtle_wow then
         :AddReagent(5637, 2) -- Large Fang
         :AddReagent(7287, 4) -- Red Whelp Scale
         :AddReagent(55249, 2) -- Crystal Quartz
+        :Save()
+
+    module:NewCraft(34760, "Grimtotem Bracers", 125, {})
+        :SetResult(42204)
+        :AddRecipe(70243, Quality.Rare, {RecipeSource.Drop})
+        :AddReagent(2319, 10) -- Medium Leather
+        :AddReagent(4233, 2) -- Cured Medium Hide
+        :AddReagent(5116, 8) -- Long Tail Feather
+        :AddReagent(5373, 4) -- Lucky Charm
+        :AddReagent(4340, 2) -- Gray Dye
         :Save()
 
     module:NewCraft(5244, "Kodo Hide Bag", 40, {})
